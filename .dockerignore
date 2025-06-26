@@ -1,0 +1,19 @@
+# Ignore dependencies and build output
+node_modules
+.next
+dist
+out
+
+# Ignore environment and logs
+# .env*
+*.log
+
+# Ignore VCS
+.git
+.gitignore
+
+# Misc
+Dockerfile
+README.md
+*.md
+uploads

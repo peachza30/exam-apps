@@ -1,0 +1,57 @@
+# FROM node:20-alpine
+
+# WORKDIR /app
+
+# RUN npm install -g pnpm
+
+# COPY package.json pnpm-lock.yaml ./
+# RUN pnpm install
+
+# COPY . .
+# COPY .env .env 
+
+# EXPOSE 3000
+
+# CMD ["pnpm", "dev"]
+
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+RUN apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/Asia/Bangkok /etc/localtime \
+    && echo "Asia/Bangkok" > /etc/timezone
+
+# Set timezone environment variable
+ENV TZ=Asia/Bangkok
+
+COPY package.json package-lock.json ./
+RUN npm install -g pnpm
+RUN pnpm install
+
+COPY . .
+COPY .env .env 
+
+RUN npm run build
+
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+RUN apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/Asia/Bangkok /etc/localtime \
+    && echo "Asia/Bangkok" > /etc/timezone
+
+# Set timezone environment variable
+ENV TZ=Asia/Bangkok
+
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+EXPOSE 3000
+
+# CMD ["node", "server.js"]
+CMD ["pnpm", "dev"]
+

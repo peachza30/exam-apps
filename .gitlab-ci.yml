@@ -1,0 +1,16 @@
+variables:
+  # docker tag SOURCE_IMAGE[:TAG] tfac-registry.cloudhm.io/library/REPOSITORY[:TAG] ###
+  CI_REGISTRY_IMAGE: registry-gitlab.tfac.or.th/tfac-services/$CI_PROJECT_NAME
+  CI_REGISTRY: registry-gitlab.tfac.or.th
+  APP_NAME: backoffice
+
+stages:
+  - build-image
+  - push-gitops
+
+include:
+  - project: 'tfac-services/ci-template'
+    ref: 'main'
+    file:
+      - 'build-image.yaml'
+      - 'push-gitops.yaml'
