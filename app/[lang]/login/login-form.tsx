@@ -46,7 +46,7 @@ const LogInForm = () => {
         <Image src={LogoTfac} alt="logo" className="h-20 w-20 text-primary" />
       </div>
       <div className="2xl:mt-8 mt-6 2xl:text-3xl text-2xl text-center font-bold text-primary">
-        TFAC BackOffice
+        MY LOVELY EXAMINATION
       </div>
       <Button
         className="w-full mt-4"
@@ -54,7 +54,7 @@ const LogInForm = () => {
         size={!isDesktop2xl ? "lg" : "md"}
       >
         <Icon icon="codicon:azure" className="h-5 w-5 mr-2" />
-        Sign In with Azure AD
+        Sign In with Your Heart ❤️
       </Button>
     </div>
   );
