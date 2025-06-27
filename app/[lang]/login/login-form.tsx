@@ -26,11 +26,9 @@ const LogInForm = () => {
 
   const handleLogin = async () => {
     // For external URLs, use window.location.href instead of router.push
-    const azureLoginUrl = `${AuthURL}/auth/user/azure/login`;
-    console.log('Redirecting to Azure AD:', azureLoginUrl);
     
     // Option 1: Redirect to Azure AD (external URL)
-    window.location.href = azureLoginUrl;
+    window.location.href = '/examination';
     
     // Option 2: If you want to test with a fake cookie first
     // Cookies.set(process.env.NEXT_PUBLIC_COOKIES_NAME, 'test-token', { 
